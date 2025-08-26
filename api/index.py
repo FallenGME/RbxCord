@@ -1,14 +1,12 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, request
 
 app = Flask(__name__)
-os.environ.get("REPLICATE_API_TOKEN")
 
 @app.route("/")
 def index():
     return {
-        "message": "RbxCord is running. This is a private website.",
-        "status": "ok",
-        "Github": "https://github.com/FallenGME/RbxCord/issues"
+        "message": "RbxCord is running. Enjoy!",
+        "creator": "FallenGME",
     }
