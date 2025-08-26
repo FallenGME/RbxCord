@@ -7,8 +7,8 @@ os.environ.get("REPLICATE_API_TOKEN")
 
 @app.route("/")
 def index():
-    return jsonify({
+    return {
         "message": "RbxCord is running. This is a private website.",
         "status": "ok",
         "Github": "https://github.com/FallenGME/RbxCord/issues"
-    })
+    }
