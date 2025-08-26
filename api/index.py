@@ -23,5 +23,3 @@ async def proxy(token):
 @app.route("/api/<path:anything>")
 async def fallback(anything):
     return {"error": "Unavailable"}, 404
-
-handler = app
