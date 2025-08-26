@@ -1,2 +1,2 @@
-quart==0.18.1
-requests==2.31.0
+Flask==3.0.0
+replicate==0.14.0

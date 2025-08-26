@@ -1,25 +1,24 @@
-from quart import Quart, request, Response
-import requests
+import os
 
-app = Quart(__name__)
+import replicate
+from flask import Flask, request
 
-DISCORD_BASE = "https://discord.com/api/webhooks/"
+app = Flask(__name__)
+os.environ.get("REPLICATE_API_TOKEN")
 
-@app.route("/api/webhooks/<path:token>", methods=["POST", "PATCH", "DELETE"])
-async def proxy(token):
-    discord_url = f"{DISCORD_BASE}{token}"
-    method = request.method
-    headers = {"Content-Type": request.headers.get("Content-Type", "application/json")}
-    data = await request.get_data()
+@app.route("/")
+def index():
+    return "This is an alt tag generator!"
 
-    response = requests.request(method, discord_url, data=data, headers=headers)
+@app.route('/generate')
+def home():
+  # Get imageUrl query param
+  args = request.args
+  imageUrl = args.to_dict().get('imageUrl')
 
-    return Response(
-        response.content,
-        status=response.status_code,
-        content_type=response.headers.get("Content-Type", "application/json")
-    )
+  # Run ML Model with imageUrl
+  model = replicate.models.get("salesforce/blip")
+  version = model.versions.get("2e1dddc8621f72155f24cf2e0adbde548458d3cab9f00c0139eea840d0ac4746")
 
-@app.route("/api/<path:anything>")
-async def fallback(anything):
-    return {"error": "Unavailable"}, 404
+  # Get the alt text result and return it
+  return version.predict(image=imageUrl)
