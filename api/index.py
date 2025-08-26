@@ -6,7 +6,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return {
-        "message": "RbxCord is running. Enjoy!",
-        "creator": "FallenGME",
-    }
+    return "test"
