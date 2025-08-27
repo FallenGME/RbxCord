@@ -1,1 +1,1 @@
-replicate==0.14.0
+flask==1.0.2
