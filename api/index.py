@@ -15,3 +15,11 @@ def index():
         "docs": "/docs"
     }
     return jsonify(response)
+
+app.errorhandler(404)
+def not_found(e):
+    return jsonify({
+        "status": "error",
+        "repository": "https://github.com/FallenGME/RbxCord",
+        "message": "The requested resource was not found."
+    }), 404
