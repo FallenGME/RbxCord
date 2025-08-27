@@ -1,12 +1,17 @@
 from flask import Flask, jsonify
-from datetime import datetime
 
 app = Flask(__name__)
 
-app.errorhandler(404)
-def not_found(e):
-    return jsonify({
-        "status": "error",
-        "repository": "https://github.com/FallenGME/RbxCord",
-        "message": "The requested resource was not found."
-    }), 404
+@app.route("/api/docs")
+def docs():
+    return jsonify(
+        name="My API",
+        version="1.0.0",
+        description="A simple API running on Vercel with Flask",
+        routes={
+            "/": "API documentation",
+            "/dang": "Returns a DANG message",
+            "/home": "Redirects to /",
+            "/something": "Example endpoint (replace with your own)"
+        }
+    )
