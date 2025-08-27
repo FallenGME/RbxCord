@@ -5,7 +5,7 @@
   "routes": [
     { "src": "/", "dest": "api/home.py" },   
     { "src": "/home", "dest": "api/home.py" },   
-    { "src": "/(.*)", "dest": "api/$1.py" }       
+    { "src": "/(.*)", "dest": "api/$1.py" },  
     { "src": "/.*", "dest": "api/error.py" }
 
   ]
